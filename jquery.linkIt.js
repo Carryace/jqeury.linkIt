@@ -1,53 +1,36 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>jQuery Slider</title>
-  <link rel="stylesheet" href="css/style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-  <script type="text/javascript" src="js/script.js"></script>
+/*
+name: LinkeIt
+author: Simiao Sun
+version: 0.1.0
+*/
 
-</head>
 
-<body>
-  <div id="container">
-      <div id="slider">
-          <header>
-            <h1>JQuery Slider</h1>
-          </header>
-          <div id="slides">
-            <div class="slide"><img src="img/slides/device-imac.png" width="900" height="200"></div>
-              <div class="slide"><img src="img/slides/device-macbook.png" width="900" height="200"></div>
-              <div class="slide"><img src="img/slides/device-iphone.png" width="900" height="200"></div>
-              <div class="slide"><img src="img/slides/device-ipad.png" width="900" height="200"></div>
-          </div>
-          <nav id="menu">
-            <ul>
-                <li class="sep"></li> 
-                <li class="product">
-                    <a href="">
-                        <img src="img/slides/device-imac-thumb.png" alt="thumbnails">
-                    </a>
-                </li>
-                <li class="product">
-                    <a href="">
-                        <img src="img/slides/device-macbook-thumb.png" alt="thumbnails">
-                    </a>
-                </li>
-                <li class="product">
-                    <a href="">
-                        <img src="img/slides/device-iphone-thumb.png" alt="thumbnails">
-                    </a>
-                </li>
-                <li class="product">
-                    <a href="">
-                        <img src="img/slides/device-ipad-thumb.png" alt="thumbnails">
-                    </a>
-                </li>
-            </ul>
-          </nav>
-        </div>
-      
-    </div>
-</body>
-
-</html>
+(function($){
+    $.fn.linkIt = function(options){
+        // Default Settings
+        var settings = $.extend({
+            href    : null,
+            text    : null,
+            target  : '_self'
+        }, options);
+        
+        //Validation
+        if(settings.href === null){
+            console.log("You need an href option for linkit to work");
+            return this;
+        }
+        
+        return this.each(function(){
+            var object = $(this);
+            
+            if(settings.text == null){
+                settings.text = object.text();
+            }
+                        
+            object.wrap('<a target="'+settings.target+'" href='+settings.href+'></a>').text(settings.text);
+        })
+        
+        
+    
+    }
+}(jQuery));
